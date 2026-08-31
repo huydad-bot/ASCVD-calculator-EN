@@ -96,7 +96,71 @@ input[type=range]{width:100%;accent-color:#1a1a18;cursor:pointer}
 
 /* Print */
 .pbtn{display:flex;align-items:center;gap:6px;padding:7px 14px;background:#1a1a18;color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;flex-shrink:0}
-.pbtn:hover{background:#2d2d2a}
+.pbtn{transition:background .12s,transform .12s,box-shadow .12s}
+.pbtn:hover{background:#2d2d2a;transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,.18)}
+.pbtn:active{transform:translateY(0);box-shadow:0 2px 6px rgba(0,0,0,.15)}
+
+/* ── mode toggle hover ── */
+#modeSimpleLabel,#modeDetailLabel{transition:background .15s,transform .12s,box-shadow .12s;position:relative}
+#modeSimpleLabel:hover,#modeDetailLabel:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,.15);z-index:1}
+
+/* ── radio-style selection boxes hover ── */
+.rg label span{transition:all .12s}
+.rg label:hover span{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.10);border-color:#9a988f}
+.rg label:has(input:checked):hover span{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.22)}
+
+/* ── checkbox item hover ── */
+.ck{transition:background .12s,transform .12s;border-radius:6px}
+.ck:hover{background:#f0efe9}
+
+/* ── result/recommendation card box hover ── */
+.rb{transition:transform .12s,box-shadow .12s}
+.rb:hover{transform:translateY(-2px) translateX(1px);box-shadow:0 4px 12px rgba(0,0,0,.10)}
+
+.rcell,.rcell.hl,.rcell.dim{transition:transform .12s,box-shadow .12s}
+.rcell:hover,.rcell.hl:hover,.rcell.dim:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.10)}
+
+.sw-box{transition:transform .12s,box-shadow .12s}
+.sw-box:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+
+/* ── CPR banner cards hover ── */
+.cpr-card{transition:transform .16s,box-shadow .16s}
+.cpr-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.14)}
+.cpr-badge{transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.cpr-card:hover .cpr-badge{transform:scale(1.15) rotate(-6deg)}
+@media print{.cpr-card:hover{transform:none;box-shadow:none}}
+
+/* ── large section modal tab buttons hover ── */
+.sec-tab-btn{transition:transform .12s,box-shadow .12s,filter .12s;position:relative;z-index:0}
+.sec-tab-btn:hover{transform:translateY(-2px);box-shadow:0 3px 9px rgba(0,0,0,.18);filter:brightness(1.08);z-index:1}
+.sec-tab-btn:active{transform:translateY(0);filter:brightness(.97)}
+@media print{.sec-tab-btn:hover{transform:none;box-shadow:none;filter:none}}
+
+/* ── special-situation statin accordion header hover ── */
+.ss-item-header{transition:transform .12s,box-shadow .12s,background .12s}
+.ss-item-header:hover{transform:translateX(3px);box-shadow:0 3px 10px rgba(123,94,167,.18);background:#ede4fb!important}
+@media print{.ss-item-header:hover{transform:none;box-shadow:none}}
+
+/* ── CPR modal mini-card hover ── */
+.cpr-mini-card{transition:transform .14s,box-shadow .14s}
+.cpr-mini-card:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(59,109,17,.18)}
+@media print{.cpr-mini-card:hover{transform:none;box-shadow:none}}
+
+/* ── clickable section headers (.sec) hover ── */
+.sec-clickable{transition:filter .12s,transform .12s}
+.sec-clickable:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.sec-clickable:active{transform:translateY(0);filter:brightness(.95)}
+@media print{.sec-clickable:hover{filter:none;transform:none}}
+
+/* ── small text toggle link hover ── */
+.text-toggle-link{transition:opacity .12s,transform .12s;display:inline-block}
+.text-toggle-link:hover{opacity:.65;transform:translateY(-1px)}
+
+/* ── pill-style toggle/action button hover ── */
+.toggle-pill-btn{transition:transform .12s,box-shadow .12s,filter .12s}
+.toggle-pill-btn:hover{transform:translateY(-2px);box-shadow:0 3px 9px rgba(0,0,0,.18);filter:brightness(1.08)}
+.toggle-pill-btn:active{transform:translateY(0);filter:brightness(.95)}
+@media print{.toggle-pill-btn:hover{transform:none;box-shadow:none;filter:none}}
 .print-only{display:none}
 .print-header{margin-bottom:12px}
 
@@ -897,11 +961,11 @@ document.addEventListener('click',function(e){
 
 <!-- CPR BANNER -->
 <div id="cardCprBanner" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
-  <div style="background:#fff;border:1px solid #e2e0db;border-top:3px solid #185fa5;border-radius:8px;overflow:hidden">
+  <div class="cpr-card" style="background:#fff;border:1px solid #e2e0db;border-top:3px solid #185fa5;border-radius:8px;overflow:hidden">
     <!-- Header: click to expand -->
     <div id="cumulativeLDLHeader" onclick="openSectionModal('cumulativeLDL')" style="padding:10px 13px;cursor:pointer;user-select:none;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;transition:background .15s" onmouseover="this.style.background='#f0f6fc'" onmouseout="this.style.background='#fff'">
       <div style="display:flex;align-items:center;gap:8px;flex:1">
-        <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:#185fa5;color:#fff;font-size:16.5px;font-weight:800;flex-shrink:0">C</span>
+        <span class="cpr-badge" style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:#185fa5;color:#fff;font-size:16.5px;font-weight:800;flex-shrink:0">C</span>
         <div>
           <span style="font-size:12.5px;font-weight:700;color:#185fa5;line-height:1.3">Cumulative LDL Burden</span>
           <div style="font-size:11.5px;color:#5f5e5a;line-height:1.6;margin-top:3px"><b style="color:#1a1a18">Duration of exposure</b> matters more than "how high." Treat earlier, lower, and longer.</div>
@@ -915,10 +979,10 @@ document.addEventListener('click',function(e){
 
       <!-- Tab buttons -->
       <div style="display:flex;border-bottom:1px solid #ddeaf8;background:#f5f9fe">
-        <button id="clTab0" onclick="switchCLTab(0)" style="flex:1;padding:7px 4px;border:none;background:#185fa5;color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;border-right:1px solid #ddeaf8">Core Concept</button>
-        <button id="clTab1" onclick="switchCLTab(1)" style="flex:1;padding:7px 4px;border:none;background:#f5f9fe;color:#185fa5;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #ddeaf8">Evidence</button>
-        <button id="clTab2" onclick="switchCLTab(2)" style="flex:1;padding:7px 4px;border:none;background:#f5f9fe;color:#185fa5;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #ddeaf8">By Life Stage</button>
-        <button id="clTab3" onclick="switchCLTab(3)" style="flex:1;padding:7px 4px;border:none;background:#f5f9fe;color:#185fa5;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit">Clinical Application</button>
+        <button id="clTab0" class="sec-tab-btn" onclick="switchCLTab(0)" style="flex:1;padding:7px 4px;border:none;background:#185fa5;color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;border-right:1px solid #ddeaf8">Core Concept</button>
+        <button id="clTab1" class="sec-tab-btn" onclick="switchCLTab(1)" style="flex:1;padding:7px 4px;border:none;background:#f5f9fe;color:#185fa5;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #ddeaf8">Evidence</button>
+        <button id="clTab2" class="sec-tab-btn" onclick="switchCLTab(2)" style="flex:1;padding:7px 4px;border:none;background:#f5f9fe;color:#185fa5;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #ddeaf8">By Life Stage</button>
+        <button id="clTab3" class="sec-tab-btn" onclick="switchCLTab(3)" style="flex:1;padding:7px 4px;border:none;background:#f5f9fe;color:#185fa5;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit">Clinical Application</button>
       </div>
 
       <!-- ── Tab 0: Core Concept ── -->
@@ -1101,11 +1165,11 @@ function switchCLTab(idx){
   });
 }
 </script>
-  <div style="background:#fff;border:1px solid #e2e0db;border-top:3px solid #639922;border-radius:8px;overflow:hidden">
+  <div class="cpr-card" style="background:#fff;border:1px solid #e2e0db;border-top:3px solid #639922;border-radius:8px;overflow:hidden">
     <!-- Header: click to expand -->
     <div id="precisionHeader" onclick="openSectionModal('precision')" style="padding:10px 13px;cursor:pointer;user-select:none;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;transition:background .15s" onmouseover="this.style.background='#f4f9f0'" onmouseout="this.style.background='#fff'">
       <div style="display:flex;align-items:center;gap:8px;flex:1">
-        <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:#639922;color:#fff;font-size:16.5px;font-weight:800;flex-shrink:0">P</span>
+        <span class="cpr-badge" style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:#639922;color:#fff;font-size:16.5px;font-weight:800;flex-shrink:0">P</span>
         <div>
           <span style="font-size:12.5px;font-weight:700;color:#639922;line-height:1.3">Precision Prevention</span>
           <div style="font-size:11.5px;color:#5f5e5a;line-height:1.6;margin-top:3px">PREVENT risk + risk-enhancing factors + CAC + ApoB + CKM stage combined <b style="color:#1a1a18">on a per-patient basis</b>.</div>
@@ -1119,29 +1183,29 @@ function switchCLTab(idx){
 
       <!-- Tab buttons -->
       <div style="display:flex;border-bottom:1px solid #dff0d0;background:#f6faf2">
-        <button id="ppTab0" onclick="switchPPTab(0)" style="flex:1;padding:7px 4px;border:none;background:#639922;color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;border-right:1px solid #dff0d0">CPR Framework</button>
-        <button id="ppTab1" onclick="switchPPTab(1)" style="flex:1;padding:7px 4px;border:none;background:#f6faf2;color:#3b6d11;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #dff0d0">Risk Enhancers</button>
-        <button id="ppTab2" onclick="switchPPTab(2)" style="flex:1;padding:7px 4px;border:none;background:#f6faf2;color:#3b6d11;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #dff0d0">CAC Reclassification</button>
-        <button id="ppTab3" onclick="switchPPTab(3)" style="flex:1;padding:7px 4px;border:none;background:#f6faf2;color:#3b6d11;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit">ApoB · CKM</button>
+        <button id="ppTab0" class="sec-tab-btn" onclick="switchPPTab(0)" style="flex:1;padding:7px 4px;border:none;background:#639922;color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;border-right:1px solid #dff0d0">CPR Framework</button>
+        <button id="ppTab1" class="sec-tab-btn" onclick="switchPPTab(1)" style="flex:1;padding:7px 4px;border:none;background:#f6faf2;color:#3b6d11;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #dff0d0">Risk Enhancers</button>
+        <button id="ppTab2" class="sec-tab-btn" onclick="switchPPTab(2)" style="flex:1;padding:7px 4px;border:none;background:#f6faf2;color:#3b6d11;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #dff0d0">CAC Reclassification</button>
+        <button id="ppTab3" class="sec-tab-btn" onclick="switchPPTab(3)" style="flex:1;padding:7px 4px;border:none;background:#f6faf2;color:#3b6d11;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit">ApoB · CKM</button>
       </div>
 
       <!-- ── Tab 0: CPR Framework ── -->
       <div id="ppPanel0" style="padding:12px 13px;display:block">
         <!-- CPR 3 steps -->
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:10px">
-          <div onclick="openCPRModal('C')" style="background:#eaf3de;border:1px solid #c0dd97;border-radius:8px;padding:9px 10px;text-align:center;cursor:pointer;transition:background .15s" onmouseover="this.style.background='#dcecc8'" onmouseout="this.style.background='#eaf3de'">
+          <div class="cpr-mini-card" onclick="openCPRModal('C')" style="background:#eaf3de;border:1px solid #c0dd97;border-radius:8px;padding:9px 10px;text-align:center;cursor:pointer;transition:background .15s" onmouseover="this.style.background='#dcecc8'" onmouseout="this.style.background='#eaf3de'">
             <div style="font-size:16.5px;font-weight:800;color:#3b6d11;line-height:1">C</div>
             <div style="font-size:12.5px;font-weight:700;color:#3b6d11;margin-top:2px">Calculate</div>
             <div style="font-size:10.5px;color:#5f5e5a;margin-top:3px;line-height:1.5">Calculate PREVENT<br>10-yr/30-yr ASCVD risk</div>
             <div style="font-size:8px;color:#639922;margin-top:4px;opacity:.75">Click for details ▾</div>
           </div>
-          <div onclick="openCPRModal('P')" style="background:#eaf3de;border:1px solid #c0dd97;border-radius:8px;padding:9px 10px;text-align:center;cursor:pointer;transition:background .15s" onmouseover="this.style.background='#dcecc8'" onmouseout="this.style.background='#eaf3de'">
+          <div class="cpr-mini-card" onclick="openCPRModal('P')" style="background:#eaf3de;border:1px solid #c0dd97;border-radius:8px;padding:9px 10px;text-align:center;cursor:pointer;transition:background .15s" onmouseover="this.style.background='#dcecc8'" onmouseout="this.style.background='#eaf3de'">
             <div style="font-size:16.5px;font-weight:800;color:#3b6d11;line-height:1">P</div>
             <div style="font-size:12.5px;font-weight:700;color:#3b6d11;margin-top:2px">Personalize</div>
             <div style="font-size:10.5px;color:#5f5e5a;margin-top:3px;line-height:1.5">Incorporate risk enhancers,<br>reproductive factors, PRS</div>
             <div style="font-size:8px;color:#639922;margin-top:4px;opacity:.75">Click for details ▾</div>
           </div>
-          <div onclick="openCPRModal('R')" style="background:#eaf3de;border:1px solid #c0dd97;border-radius:8px;padding:9px 10px;text-align:center;cursor:pointer;transition:background .15s" onmouseover="this.style.background='#dcecc8'" onmouseout="this.style.background='#eaf3de'">
+          <div class="cpr-mini-card" onclick="openCPRModal('R')" style="background:#eaf3de;border:1px solid #c0dd97;border-radius:8px;padding:9px 10px;text-align:center;cursor:pointer;transition:background .15s" onmouseover="this.style.background='#dcecc8'" onmouseout="this.style.background='#eaf3de'">
             <div style="font-size:16.5px;font-weight:800;color:#3b6d11;line-height:1">R</div>
             <div style="font-size:12.5px;font-weight:700;color:#3b6d11;margin-top:2px">Reclassify</div>
             <div style="font-size:10.5px;color:#5f5e5a;margin-top:3px;line-height:1.5">Resolve uncertainty<br>with CAC · reclassify</div>
@@ -1334,11 +1398,11 @@ function switchPPTab(idx){
   });
 }
 </script>
-  <div style="background:#fff;border:1px solid #e2e0db;border-top:3px solid #a32d2d;border-radius:8px;overflow:hidden">
+  <div class="cpr-card" style="background:#fff;border:1px solid #e2e0db;border-top:3px solid #a32d2d;border-radius:8px;overflow:hidden">
     <!-- Header: click to expand -->
     <div id="residualRiskHeader" onclick="openSectionModal('residual')" style="padding:10px 13px;cursor:pointer;user-select:none;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;transition:background .15s" onmouseover="this.style.background='#fdf8f8'" onmouseout="this.style.background='#fff'">
       <div style="display:flex;align-items:center;gap:8px;flex:1">
-        <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:#a32d2d;color:#fff;font-size:16.5px;font-weight:800;flex-shrink:0">R</span>
+        <span class="cpr-badge" style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:#a32d2d;color:#fff;font-size:16.5px;font-weight:800;flex-shrink:0">R</span>
         <div>
           <span style="font-size:12.5px;font-weight:700;color:#a32d2d;line-height:1.3">Residual Risk beyond LDL</span>
           <div style="font-size:11.5px;color:#5f5e5a;line-height:1.6;margin-top:3px">Even after LDL control with a statin, use ApoB · Lp(a) · non-HDL · TG to <b style="color:#1a1a18">capture residual risk and guide further treatment.</b></div>
@@ -1352,10 +1416,10 @@ function switchPPTab(idx){
 
       <!-- Tab buttons -->
       <div style="display:flex;border-bottom:1px solid #e2e0db;background:#fafaf8">
-        <button id="rrTab0" onclick="switchRRTab(0)" style="flex:1;padding:7px 4px;border:none;background:#a32d2d;color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;border-right:1px solid #e2e0db">Overview</button>
-        <button id="rrTab1" onclick="switchRRTab(1)" style="flex:1;padding:7px 4px;border:none;background:#fafaf8;color:#a32d2d;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #e2e0db">Mechanisms</button>
-        <button id="rrTab2" onclick="switchRRTab(2)" style="flex:1;padding:7px 4px;border:none;background:#fafaf8;color:#a32d2d;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #e2e0db">Risk Overlap</button>
-        <button id="rrTab3" onclick="switchRRTab(3)" style="flex:1;padding:7px 4px;border:none;background:#fafaf8;color:#a32d2d;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit">Clinical Application</button>
+        <button id="rrTab0" class="sec-tab-btn" onclick="switchRRTab(0)" style="flex:1;padding:7px 4px;border:none;background:#a32d2d;color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;border-right:1px solid #e2e0db">Overview</button>
+        <button id="rrTab1" class="sec-tab-btn" onclick="switchRRTab(1)" style="flex:1;padding:7px 4px;border:none;background:#fafaf8;color:#a32d2d;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #e2e0db">Mechanisms</button>
+        <button id="rrTab2" class="sec-tab-btn" onclick="switchRRTab(2)" style="flex:1;padding:7px 4px;border:none;background:#fafaf8;color:#a32d2d;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;border-right:1px solid #e2e0db">Risk Overlap</button>
+        <button id="rrTab3" class="sec-tab-btn" onclick="switchRRTab(3)" style="flex:1;padding:7px 4px;border:none;background:#fafaf8;color:#a32d2d;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit">Clinical Application</button>
       </div>
 
       <!-- ── Tab 0: Overview ── -->
@@ -1641,7 +1705,7 @@ function switchRRTab(idx){
         <div style="display:flex;align-items:center;gap:6px">
           <input type="number" id="age" min="20" max="90" value="" autocomplete="off"
             style="width:68px;padding:5px 8px;border:1px solid #d0cec8;border-radius:7px;font-size:17.5px;font-weight:700;color:#1a1a18;text-align:center">
-          <span onclick="toggleAgeRangeInfo()" style="font-size:12.5px;color:#185fa5;font-weight:600;cursor:pointer;text-decoration:underline dotted;text-underline-offset:2px" title="View guidance for out-of-range ages">30–79 yr: PREVENT validated range</span>
+          <span class="text-toggle-link" onclick="toggleAgeRangeInfo()" style="font-size:12.5px;color:#185fa5;font-weight:600;cursor:pointer;text-decoration:underline dotted;text-underline-offset:2px" title="View guidance for out-of-range ages">30–79 yr: PREVENT validated range</span>
         </div>
         <div id="ageRangeInfo" style="display:none;margin-top:5px;padding:9px 11px;background:#eaf2fb;border-radius:8px;border-left:3px solid #185fa5;font-size:11.5px;color:#1a1a18;line-height:1.8;width:295px;max-width:295px;box-sizing:border-box;overflow:hidden;overflow-wrap:anywhere;word-break:keep-all;white-space:normal">
           <div style="font-weight:700;color:#185fa5;margin-bottom:4px">Principles for Ages Outside the PREVENT 2023 Validated Range</div>
@@ -1656,7 +1720,7 @@ function switchRRTab(idx){
           LDL ≥190 → use the risk-independent high-intensity statin indication section<br>
           Diabetes/CKD stage 3–4 → guideline-recommended age range is <b>40–75</b>; beyond 75, downgrade to <b>shared decision (consider)</b> alongside lifestyle measures<br>
           Primary prevention in general: shared decision-making based on frailty, life expectancy, polypharmacy, and patient preference (2026 ACC/AHA)</span>
-          <div style="text-align:right;margin-top:4px"><span onclick="toggleAgeRangeInfo()" style="font-size:11.5px;color:#185fa5;cursor:pointer;font-weight:600">Close ✕</span></div>
+          <div style="text-align:right;margin-top:4px"><span class="text-toggle-link" onclick="toggleAgeRangeInfo()" style="font-size:11.5px;color:#185fa5;cursor:pointer;font-weight:600">Close ✕</span></div>
         </div>
         <div id="ageOutOfRange" style="display:none;margin-top:4px;padding:5px 9px;border-radius:6px;font-size:12.5px;line-height:1.55"></div>
       </div>
@@ -1741,7 +1805,7 @@ function switchRRTab(idx){
     <!-- Currently on a statin -->
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
       <label class="ck" style="display:inline-flex;margin-bottom:0"><span style="font-size:13.5px;font-weight:900;color:#185fa5;margin-right:4px;vertical-align:middle">●</span><input type="checkbox" id="onStatin"> <b>Currently on a statin</b></label>
-      <span style="font-size:12.5px;color:#185fa5;font-weight:600;line-height:1.5">If the pre-treatment lipid values are unknown, you can select the <span onclick="var b=document.getElementById('statinIntensityBox');var s=getComputedStyle(b).display==='none';b.style.display=s?'block':'none';this.querySelector('.chev').textContent=s?' ▴':' ▾';" style="color:#0c447c;font-weight:800;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">statin intensity<span class="chev" style="font-size:10.5px"> ▾</span></span> currently used to calculate and enter an estimated baseline.</span>
+      <span style="font-size:12.5px;color:#185fa5;font-weight:600;line-height:1.5">If the pre-treatment lipid values are unknown, you can select the <span class="text-toggle-link" onclick="var b=document.getElementById('statinIntensityBox');var s=getComputedStyle(b).display==='none';b.style.display=s?'block':'none';this.querySelector('.chev').textContent=s?' ▴':' ▾';" style="color:#0c447c;font-weight:800;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">statin intensity<span class="chev" style="font-size:10.5px"> ▾</span></span> currently used to calculate and enter an estimated baseline.</span>
     </div>
     <!-- Statin intensity table (click to expand) -->
     <div id="statinIntensityBox" style="display:none;margin-bottom:8px;padding:10px 12px;background:#f0f6fc;border:1px solid #b5d4f4;border-radius:8px">
@@ -1846,7 +1910,7 @@ function switchRRTab(idx){
     <div class="field" style="margin-top:7px;margin-bottom:0">
       <span class="fl">ApoB — Directly Measured Value (mg/dL)</span>
       <input type="number" autocomplete="off" id="apob" step="1" min="20" max="300" placeholder="an LDL-C-based estimate is used automatically if left blank">
-      <div style="font-size:11.5px;color:#888780;margin-top:3px;line-height:1.5">※ Direct measurement recommended (2026 ACC/AHA Class IIa) if TG ≥150 · diabetes · on-treatment LDL &lt;70 · <span id="ldlNonhdlTerm" onclick="toggleLdlNonhdlBox()" style="color:#c07a00;font-weight:700;cursor:pointer;text-decoration:underline dotted;text-underline-offset:2px" title="Click to see explanation">LDL/non-HDL discordance</span></div>
+      <div style="font-size:11.5px;color:#888780;margin-top:3px;line-height:1.5">※ Direct measurement recommended (2026 ACC/AHA Class IIa) if TG ≥150 · diabetes · on-treatment LDL &lt;70 · <span id="ldlNonhdlTerm" class="text-toggle-link" onclick="toggleLdlNonhdlBox()" style="color:#c07a00;font-weight:700;cursor:pointer;text-decoration:underline dotted;text-underline-offset:2px" title="Click to see explanation">LDL/non-HDL discordance</span></div>
       <div id="ldlNonhdlBox" style="display:none;margin-top:5px;padding:9px 11px;background:#fffbee;border-radius:8px;border-left:3px solid #c07a00;line-height:1.7">
         <div style="font-size:11.5px;font-weight:700;color:#c07a00;margin-bottom:4px">▸ What Is LDL/non-HDL Discordance?</div>
         <div style="font-size:11.5px;color:#5a4a00">
@@ -1862,7 +1926,7 @@ function switchRRTab(idx){
           <b>Clinical significance:</b> If non-HDL-C exceeds target despite the LDL-C target being met, it indicates <b>residual cardiovascular risk</b> from remnant cholesterol (VLDL remnants, etc.).<br>
           In this situation, direct ApoB measurement further confirms the true atherogenic particle burden.
         </div>
-        <div style="text-align:right;margin-top:5px"><span onclick="toggleLdlNonhdlBox()" style="font-size:11.5px;color:#c07a00;cursor:pointer;font-weight:600">Close ✕</span></div>
+        <div style="text-align:right;margin-top:5px"><span class="text-toggle-link" onclick="toggleLdlNonhdlBox()" style="font-size:11.5px;color:#c07a00;cursor:pointer;font-weight:600">Close ✕</span></div>
       </div>
     </div>
     <div id="apobIndBox" style="display:none;margin-top:5px;padding:7px 10px;background:#e6f1fb;border-radius:7px;border-left:3px solid #185fa5">
@@ -1872,7 +1936,7 @@ function switchRRTab(idx){
   </div>
 
   <div class="card" id="cardRiskEnhancer" style="background:#eaf7fb">
-    <div class="sec" onclick="toggleSection('riskEnhancerBody','riskEnhancerArrow')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none">
+    <div class="sec sec-clickable" onclick="toggleSection('riskEnhancerBody','riskEnhancerArrow')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none">
       <span>Risk Enhancers <span style="font-size:12.5px;font-weight:600;color:#bfe3ff;letter-spacing:0;text-transform:none;margin-left:4px">For precision prevention — click for details.</span></span>
       <span id="riskEnhancerArrow" style="font-size:13.5px;color:#fff;transition:transform .2s;display:inline-block">▶</span>
     </div>
@@ -1932,7 +1996,7 @@ function switchRRTab(idx){
       <input type="checkbox" class="enh" id="enhCkm">
       <div>
         <div style="font-weight:600;color:#1a1a18">Cardiovascular-Kidney-Metabolic (CKM) Syndrome
-          <span onclick="event.preventDefault();event.stopPropagation();toggleSection('ckmPanel','ckmPanelArrow')"
+          <span class="text-toggle-link" onclick="event.preventDefault();event.stopPropagation();toggleSection('ckmPanel','ckmPanelArrow')"
             style="font-size:11.5px;color:#185fa5;cursor:pointer;margin-left:6px;font-weight:400">
             Details ▾<span id="ckmPanelArrow" style="display:none"></span>
           </span>
@@ -1970,7 +2034,7 @@ function switchRRTab(idx){
         ※ 2023 AHA: PREVENT includes CKM components (eGFR, UACR, HbA1c, BMI) — the PREVENT score already partially captures this.<br>
         ※ These items are meant to capture residual CKM risk not already reflected in PREVENT.
       </div>
-      <div style="text-align:right;margin-top:6px"><span onclick="event.preventDefault();event.stopPropagation();toggleSection('ckmPanel','ckmPanelArrow')" style="font-size:11.5px;color:#185fa5;cursor:pointer;font-weight:600">Close ✕</span></div>
+      <div style="text-align:right;margin-top:6px"><span class="text-toggle-link" onclick="event.preventDefault();event.stopPropagation();toggleSection('ckmPanel','ckmPanelArrow')" style="font-size:11.5px;color:#185fa5;cursor:pointer;font-weight:600">Close ✕</span></div>
     </div>
 
     <!-- ── Chronic Inflammatory Disease ── -->
@@ -1978,7 +2042,7 @@ function switchRRTab(idx){
       <input type="checkbox" class="enh" id="enhInflam">
       <div>
         <div style="font-weight:600;color:#1a1a18">Chronic Inflammatory Disease
-          <span onclick="event.preventDefault();event.stopPropagation();toggleSection('inflamPanel','inflamPanelArrow')"
+          <span class="text-toggle-link" onclick="event.preventDefault();event.stopPropagation();toggleSection('inflamPanel','inflamPanelArrow')"
             style="font-size:11.5px;color:#185fa5;cursor:pointer;margin-left:6px;font-weight:400">
             Details ▾<span id="inflamPanelArrow" style="display:none"></span>
           </span>
@@ -2021,7 +2085,7 @@ function switchRRTab(idx){
           </div>
         </label>
       </div>
-      <div style="text-align:right;margin-top:6px"><span onclick="event.preventDefault();event.stopPropagation();toggleSection('inflamPanel','inflamPanelArrow')" style="font-size:11.5px;color:#c9a02a;cursor:pointer;font-weight:600">Close ✕</span></div>
+      <div style="text-align:right;margin-top:6px"><span class="text-toggle-link" onclick="event.preventDefault();event.stopPropagation();toggleSection('inflamPanel','inflamPanelArrow')" style="font-size:11.5px;color:#c9a02a;cursor:pointer;font-weight:600">Close ✕</span></div>
     </div>
 
     <!-- ── Table 13 #5 ── -->
@@ -2150,7 +2214,7 @@ function switchRRTab(idx){
 
   <!-- ══ Statin Indications Independent of Risk Category ══ -->
   <div class="card" id="cardAbsInd" style="background:#eaf7fb">
-    <div class="sec" onclick="openSectionModal('absInd')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none">
+    <div class="sec sec-clickable" onclick="openSectionModal('absInd')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none">
       <span>Statin Indications Independent of Risk Category <span style="font-size:12.5px;font-weight:600;color:#bfe3ff;letter-spacing:0;text-transform:none;margin-left:4px">Activated once basic info or a CAC score is entered</span><span style="font-size:10.5px;font-weight:400;color:#cfe4ee;letter-spacing:0;text-transform:none"> (not bound by the PREVENT score)</span></span>
       <span id="absIndArrow" style="font-size:13.5px;color:#fff;transition:transform .2s;display:inline-block">▶</span>
     </div>
@@ -2164,7 +2228,7 @@ function switchRRTab(idx){
 
   <!-- ══ Statin Therapy in Special Situations ══ -->
   <div class="card" id="cardSpecialStatin" style="background:#eaf7fb">
-    <div class="sec" onclick="openSectionModal('specialStatin')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;background:#7b5ea7">
+    <div class="sec sec-clickable" onclick="openSectionModal('specialStatin')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;background:#7b5ea7">
       <span style="display:flex;align-items:center;gap:7px">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         Statin Therapy in Special Situations
@@ -2177,7 +2241,7 @@ function switchRRTab(idx){
 
       <!-- ① Dialysis patients -->
       <div style="margin-bottom:6px">
-        <div onclick="toggleSection('ss1body','ss1arrow')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:8px 11px;background:#f3eeff;border:1px solid #c9b4e8;border-radius:8px;user-select:none">
+        <div class="ss-item-header" onclick="toggleSection('ss1body','ss1arrow')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:8px 11px;background:#f3eeff;border:1px solid #c9b4e8;border-radius:8px;user-select:none">
           <div style="display:flex;align-items:center;gap:7px">
             <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;background:#7b5ea7;color:#fff;font-size:11.5px;font-weight:800;flex-shrink:0">1</span>
             <span style="font-size:13.5px;font-weight:700;color:#1a1a18">Starting vs. continuing therapy in dialysis patients</span>
@@ -2222,7 +2286,7 @@ function switchRRTab(idx){
 
       <!-- ② Renal transplant patients -->
       <div style="margin-bottom:6px">
-        <div onclick="toggleSection('ss2body','ss2arrow')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:8px 11px;background:#f3eeff;border:1px solid #c9b4e8;border-radius:8px;user-select:none">
+        <div class="ss-item-header" onclick="toggleSection('ss2body','ss2arrow')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:8px 11px;background:#f3eeff;border:1px solid #c9b4e8;border-radius:8px;user-select:none">
           <div style="display:flex;align-items:center;gap:7px">
             <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;background:#7b5ea7;color:#fff;font-size:11.5px;font-weight:800;flex-shrink:0">2</span>
             <span style="font-size:13.5px;font-weight:700;color:#1a1a18">Statin therapy and precautions in renal transplant recipients</span>
@@ -2296,7 +2360,7 @@ function switchRRTab(idx){
 
       <!-- ③ End-of-life patients -->
       <div style="margin-bottom:6px">
-        <div onclick="toggleSection('ss3body','ss3arrow')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:8px 11px;background:#f3eeff;border:1px solid #c9b4e8;border-radius:8px;user-select:none">
+        <div class="ss-item-header" onclick="toggleSection('ss3body','ss3arrow')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:8px 11px;background:#f3eeff;border:1px solid #c9b4e8;border-radius:8px;user-select:none">
           <div style="display:flex;align-items:center;gap:7px">
             <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;background:#7b5ea7;color:#fff;font-size:11.5px;font-weight:800;flex-shrink:0">3</span>
             <span style="font-size:13.5px;font-weight:700;color:#1a1a18">Statin therapy in patients with limited life expectancy</span>
@@ -2340,7 +2404,7 @@ function switchRRTab(idx){
 
       <!-- ④ Oncology patients -->
       <div style="margin-bottom:6px">
-        <div onclick="toggleSection('ss4body','ss4arrow')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:8px 11px;background:#f3eeff;border:1px solid #c9b4e8;border-radius:8px;user-select:none">
+        <div class="ss-item-header" onclick="toggleSection('ss4body','ss4arrow')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:8px 11px;background:#f3eeff;border:1px solid #c9b4e8;border-radius:8px;user-select:none">
           <div style="display:flex;align-items:center;gap:7px">
             <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;background:#7b5ea7;color:#fff;font-size:11.5px;font-weight:800;flex-shrink:0">4</span>
             <span style="font-size:13.5px;font-weight:700;color:#1a1a18">Statin therapy in patients with active cancer</span>
@@ -2406,7 +2470,7 @@ function switchRRTab(idx){
 
       <!-- ⑤ Other precautions -->
       <div>
-        <div onclick="toggleSection('ss5body','ss5arrow')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:8px 11px;background:#f3eeff;border:1px solid #c9b4e8;border-radius:8px;user-select:none">
+        <div class="ss-item-header" onclick="toggleSection('ss5body','ss5arrow')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:8px 11px;background:#f3eeff;border:1px solid #c9b4e8;border-radius:8px;user-select:none">
           <div style="display:flex;align-items:center;gap:7px">
             <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;background:#7b5ea7;color:#fff;font-size:11.5px;font-weight:800;flex-shrink:0">5</span>
             <span style="font-size:13.5px;font-weight:700;color:#1a1a18">Other Precautions</span>
@@ -2479,7 +2543,7 @@ function switchRRTab(idx){
 
   <!-- ══ NNT Comparison ══ -->
   <div class="card" id="cardNntLeft" style="background:#eaf7fb">
-    <div class="sec" onclick="openSectionModal('nnt')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;background:#7b5ea7">
+    <div class="sec sec-clickable" onclick="openSectionModal('nnt')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;background:#7b5ea7">
       <span style="display:flex;align-items:center;gap:7px">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" style="flex-shrink:0"><path d="M3 18h18"/><path d="M3 12h12"/><path d="M3 6h6"/></svg>
         Statin Treatment Effect — NNT Comparison
@@ -2497,9 +2561,9 @@ function switchRRTab(idx){
     </div>
     <!-- Tab buttons -->
     <div style="display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap">
-      <button id="nntTabBtn0" onclick="switchNNTTab(0)" style="padding:5px 12px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;border:1px solid #c9b4e8;background:#1a1a18;color:#fff;font-family:inherit">NNT Comparison Table</button>
-      <button id="nntTabBtn1" onclick="switchNNTTab(1)" style="padding:5px 12px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;border:1px solid #c9b4e8;background:#f3eeff;color:#7b5ea7;font-family:inherit">Visualization</button>
-      <button id="nntTabBtn2" onclick="switchNNTTab(2)" style="padding:5px 12px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;border:1px solid #c9b4e8;background:#f3eeff;color:#7b5ea7;font-family:inherit">Primary Prevention Analysis</button>
+      <button id="nntTabBtn0" class="sec-tab-btn" onclick="switchNNTTab(0)" style="padding:5px 12px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;border:1px solid #c9b4e8;background:#1a1a18;color:#fff;font-family:inherit">NNT Comparison Table</button>
+      <button id="nntTabBtn1" class="sec-tab-btn" onclick="switchNNTTab(1)" style="padding:5px 12px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;border:1px solid #c9b4e8;background:#f3eeff;color:#7b5ea7;font-family:inherit">Visualization</button>
+      <button id="nntTabBtn2" class="sec-tab-btn" onclick="switchNNTTab(2)" style="padding:5px 12px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;border:1px solid #c9b4e8;background:#f3eeff;color:#7b5ea7;font-family:inherit">Primary Prevention Analysis</button>
     </div>
 
     <!-- Panel 0: NNT comparison table -->
@@ -2617,7 +2681,7 @@ function switchRRTab(idx){
 
   <!-- ══ Standalone NNH Card ══ -->
   <div class="card" id="cardNnhLeft" style="background:#eaf7fb">
-    <div class="sec" onclick="openSectionModal('nnh')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;background:#7b5ea7">
+    <div class="sec sec-clickable" onclick="openSectionModal('nnh')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;background:#7b5ea7">
       <span style="display:flex;align-items:center;gap:7px">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         Statin Adverse Effects — NNH Comparison
@@ -2661,9 +2725,9 @@ function switchRRTab(idx){
             <tbody>
               <tr>
                 <td>
-                  <b style="cursor:pointer;color:#185fa5;text-decoration:underline dotted;text-underline-offset:2px"
+                  <b class="text-toggle-link" style="cursor:pointer;color:#185fa5;text-decoration:underline dotted;text-underline-offset:2px"
                      onclick="toggleNodmDetail()" title="Click to see details">New-Onset Diabetes (NODM)</b>
-                  <br><span style="font-size:10.5px;color:#185fa5;cursor:pointer" onclick="toggleNodmDetail()">&#9658; View details</span>
+                  <br><span class="text-toggle-link" style="font-size:10.5px;color:#185fa5;cursor:pointer" onclick="toggleNodmDetail()">&#9658; View details</span>
                 </td>
                 <td style="color:#854f0b">+0.10–0.43%/yr</td>
                 <td>1.10–1.36</td>
@@ -2680,7 +2744,7 @@ function switchRRTab(idx){
           <!-- Fixed header -->
           <div style="padding:10px 16px 9px;background:#faeeda;border-bottom:1px solid #f5d88a;border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:space-between">
             <span style="font-size:13.5px;font-weight:700;color:#854f0b">New-Onset Diabetes (NODM) &#8212; Mechanism and Clinical Application</span>
-            <button onclick="toggleNodmDetail()" style="padding:3px 13px;background:#854f0b;color:#fff;border:none;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit">Close &#10005;</button>
+            <button class="toggle-pill-btn" onclick="toggleNodmDetail()" style="padding:3px 13px;background:#854f0b;color:#fff;border:none;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit">Close &#10005;</button>
           </div>
           <!-- Scrollable body -->
           <div style="max-height:420px;overflow-y:auto;overflow-x:hidden;padding:14px 16px 12px;background:#fffbf0;line-height:1.75">
@@ -2792,10 +2856,10 @@ function switchRRTab(idx){
               </tr>
               <tr>
                 <td>
-                  <b style="cursor:pointer;color:#185fa5;text-decoration:underline dotted;text-underline-offset:2px"
+                  <b class="text-toggle-link" style="cursor:pointer;color:#185fa5;text-decoration:underline dotted;text-underline-offset:2px"
                      onclick="toggleSamsDetail()" title="Click to see details">Pharmacologic SAMS</b>
                   <br><span style="font-size:11.5px;color:#888780">(true myalgia, etc.)</span>
-                  <br><span style="font-size:10.5px;color:#185fa5;cursor:pointer" onclick="toggleSamsDetail()">▶ View details</span>
+                  <br><span class="text-toggle-link" style="font-size:10.5px;color:#185fa5;cursor:pointer" onclick="toggleSamsDetail()">▶ View details</span>
                 </td>
                 <td style="color:#854f0b">+0.5–2%/yr<br><span style="font-size:11.5px">(NLA 2022 estimate)</span></td>
                 <td>RCT ~1.07<br><span style="font-size:11.5px">observational 1.5–3×</span></td>
@@ -2813,7 +2877,7 @@ function switchRRTab(idx){
           <!-- ── Fixed header ── -->
           <div style="padding:10px 16px 9px;background:#ddeefa;border-bottom:1px solid #b8d4ee;border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:space-between">
             <span style="font-size:13.5px;font-weight:700;color:#185fa5">Pharmacologic SAMS &#8212; Mechanism and Clinical Application</span>
-            <button onclick="toggleSamsDetail()" style="padding:3px 13px;background:#185fa5;color:#fff;border:none;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit">Close &#10005;</button>
+            <button class="toggle-pill-btn" onclick="toggleSamsDetail()" style="padding:3px 13px;background:#185fa5;color:#fff;border:none;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit">Close &#10005;</button>
           </div>
 
           <!-- ── Scrollable body (fixed height → scrollbar always shown) ── -->
@@ -3075,7 +3139,7 @@ function switchRRTab(idx){
   <div class="card no-print" style="background:#eaf7fb">
     <div class="sec" style="display:flex;align-items:center;gap:8px">
       <span>Result Summary for EMR Copy</span>
-      <button type="button" onclick="copyResultSummary()" style="padding:3px 11px;background:#6b6b68;color:#fff;border:none;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;flex-shrink:0">Copy</button>
+      <button type="button" class="toggle-pill-btn" onclick="copyResultSummary()" style="padding:3px 11px;background:#6b6b68;color:#fff;border:none;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;flex-shrink:0">Copy</button>
     </div>
     <div id="copyStatus" class="nb info" style="display:none;margin-bottom:7px"></div>
     <div id="excelStatus" class="nb info" style="display:none;margin-bottom:7px"></div>
@@ -3103,7 +3167,7 @@ function switchRRTab(idx){
     </div>
     <div id="nntSummary" style="font-size:12.5px;color:#888780;margin-top:4px">This patient's personalized NNT will be calculated once basic info is entered.</div>
     <div id="nntBtnWrap" style="display:none;margin-top:8px">
-      <button onclick="toggleSection('nntDetail','nntDetailArrow')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;border:1px solid #c9b4e8;background:#f3eeff;color:#7b5ea7;font-family:inherit">
+      <button class="toggle-pill-btn" onclick="toggleSection('nntDetail','nntDetailArrow')" style="display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;border:1px solid #c9b4e8;background:#f3eeff;color:#7b5ea7;font-family:inherit">
         View details <span id="nntDetailArrow" style="font-size:11.5px">▶</span>
       </button>
     </div>
@@ -3127,7 +3191,7 @@ function switchRRTab(idx){
 
   <!-- References and disclaimers (directly below the NNT card, standalone card in the right column) -->
   <div class="card" id="cardReference" style="margin-top:0;background:#eaf7fb">
-    <div class="sec" id="refToggle" onclick="toggleSection('refBody','refArrowSpan')"
+    <div class="sec sec-clickable" id="refToggle" onclick="toggleSection('refBody','refArrowSpan')"
       style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none">
       <span>References, Disclaimers &amp; Feedback</span>
       <span id="refArrowSpan" style="font-size:11.5px;color:#cfe4ee;margin-left:8px">▶</span>
@@ -4809,7 +4873,7 @@ function upd(){
         ${ind.active?`<div style="font-size:11.5px;color:#888780;margin-top:3px;line-height:1.5">${ind.basis}</div>`:''}
         ${ind.key==='ldl190'&&ind.active?`
         <div style="margin-top:7px">
-          <button onclick="toggleDLCN()" style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border:1px solid #c9b4e8;border-radius:6px;background:#f3eeff;color:#7b5ea7;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit">
+          <button class="toggle-pill-btn" onclick="toggleDLCN()" style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border:1px solid #c9b4e8;border-radius:6px;background:#f3eeff;color:#7b5ea7;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit">
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#7b5ea7" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
             FH Diagnostic Criteria (DLCN Score) <span id="dlcnArrow" style="font-size:10.5px">▶</span>
           </button>
@@ -4842,7 +4906,7 @@ function upd(){
         <b>HoFH clinical diagnosis (DLCN not applicable):</b> LDL &gt; 400 mg/dL + childhood tendon xanthoma, or both parents with HeFH-level LDL<br>
         <b>LDL target:</b> HeFH &lt;70 · HeFH+ASCVD &lt;55 · LDL≥190 (non-FH) &lt;100 mg/dL
       </div>
-      <div style="text-align:right;margin-top:6px"><span onclick="toggleDLCN()" style="font-size:11.5px;color:#7b5ea7;cursor:pointer;font-weight:600">Close ✕</span></div>
+      <div style="text-align:right;margin-top:6px"><span class="text-toggle-link" onclick="toggleDLCN()" style="font-size:11.5px;color:#7b5ea7;cursor:pointer;font-weight:600">Close ✕</span></div>
     </div>`:''}`;
   });
   if(g('absIndList')) g('absIndList').innerHTML=absHtml;
