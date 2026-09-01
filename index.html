@@ -3849,11 +3849,11 @@ function makeFlow(acc,preventCat,ldl,ascvd,vhr,onStatin=false,baselineLdl=null,t
         : 'Lifestyle modification';
   const s1drugs=onStatin
     ? 'Assesses whether target is met based on on-treatment/current LDL-C.'
-    : acc.c==='hi'
-      ? 'Rosuvastatin 20–40 mg &nbsp;|&nbsp; Atorvastatin 40–80 mg'
-      : acc.c==='mo'
-        ? 'Atorvastatin 10–20 mg &nbsp;|&nbsp; Rosuvastatin 5–10 mg'
-        : 'Diet · exercise · smoking cessation';
+    : (acc.c==='hi'||acc.c==='mo')
+      ? (Array.isArray(acc.d)&&acc.d.length
+          ? acc.d.join(' &nbsp;|&nbsp; ')
+          : (acc.c==='hi' ? 'Rosuvastatin 20–40 mg &nbsp;|&nbsp; Atorvastatin 40–80 mg' : 'Atorvastatin 10–20 mg &nbsp;|&nbsp; Rosuvastatin 5–10 mg'))
+      : 'Diet · exercise · smoking cessation';
   const s1ldl=onStatin?ldl:(acc.c==='hi'?afterHi:acc.c==='mo'?afterMo:ldl);
 
   // ── [Bug C] onStatin: add a note in Step 1 to confirm the statin is maximized ──
@@ -4128,11 +4128,15 @@ function makeEmrSummary({age, prevAscvd, preventCat, ldl, currentLdl, dispLdlTgt
     const prevPrefix = ageOutOfRange
       ? `Meets a risk-category-independent statin indication, so treatment is recommended ${ageRangeNote}`
       : `${preventLine}, but meets a risk-category-independent statin indication below, so treatment is recommended regardless of the PREVENT score`;
+    const hivPrefLine = (activeInds.some(i=>i.key==='hiv') && strengthText==='moderate-intensity')
+      ? `Preferred agent: pitavastatin 4 mg (CYP3A4-independent → minimal protease-inhibitor interaction, REPRIEVE trial)`
+      : '';
     return bl([
       prevPrefix,
       `Indication: ${indNames}`,
       `Pre-treatment LDL-C is ${ldl} mg/dL, and ${txState}the LDL-C target is <${dispLdlTgt} mg/dL`,
       `${strengthText} statin therapy is recommended, and ${addonText}`,
+      hivPrefLine,
       ckdLine,
       tgLine,
       nntLine
@@ -4909,8 +4913,12 @@ function upd(){
                nt:'info',ldlTgt:100,nhTgt:130};
         }
       } else {
-        // Another absolute indication (diabetes, CKD, etc.) already determined the prescription — note HIV as an additional indication
+        // Another absolute indication (diabetes, CKD, etc.) already determined the prescription — note HIV as an additional indication and reflect the preferred agent in the Step 1 list
+        const hivPrefDrugs = (acc.c==='mo' && Array.isArray(acc.d))
+          ? ['Pitavastatin 4 mg', ...acc.d.filter(x=>!x.startsWith('Pitavastatin'))]
+          : acc.d;
         acc={...acc,
+          d: hivPrefDrugs,
           ind: acc.ind + ' · HIV (stable cART, age 40–75)',
           n: (acc.n||'') + '<br><span style="color:#a32d2d;font-weight:700">▸ Additional indication — HIV (stable cART), age 40–75</span>: 2026 ACC/AHA Class I (REPRIEVE trial). The current prescribing intensity (moderate intensity) already meets the LDL target &lt;100 mg/dL. Preferred agent: <b>pitavastatin 4 mg</b> — CYP3A4-independent, minimal protease-inhibitor interaction.'
         };
